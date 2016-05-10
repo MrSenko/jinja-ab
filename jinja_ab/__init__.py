@@ -8,16 +8,16 @@ _ENV = 'AB_EXPERIMENT'
 _ENV_DEFAULT = 'control'
 
 
-class JinjaExperimentExtension(Extension):
+class JinjaAbExperimentExtension(Extension):
     """
         Jinja2 extension which supports the
-        {% experiment <name> %} markup!
+        {% experiment <name> %} or {% ab <name> %} markup!
     """
-    _tag = 'experiment'
-    _end_tag = 'end' + _tag
-    tags = set([_tag])
+    tags = set(['experiment', 'ab'])
 
     def parse(self, parser):
+        opening_tag = parser.stream.current.value
+        closing_tag = 'end' + opening_tag
         lineno = next(parser.stream).lineno
 
         # Parse the arguments
@@ -31,7 +31,7 @@ class JinjaExperimentExtension(Extension):
                                           lineno)
 
         # Parse the contents of this tag
-        body = parser.parse_statements(['name:%s' % self._end_tag],
+        body = parser.parse_statements(['name:%s' % closing_tag],
                                        drop_needle=True)
 
         # return the content matching the currently defined

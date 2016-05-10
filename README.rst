@@ -9,10 +9,21 @@ Jinja2 A/B testing extension
 This is an A/B testing extension for Jinja. It allows you to encode
 experiments in your templates and renders the experiment selected by
 the `AB_EXPERIMENT` environment variable. 'control' is the default
-experiment name if `AB_EXPERIMENT` is not specified! The syntax is::
+experiment name if `AB_EXPERIMENT` is not specified!
+
+The syntax is::
 
     {% experiment control %}This is the control{% endexperiment %}
     {% experiment v1 %}This is version 1{% endexperiment %}
+
+Alternative syntax is also supported::
+    {% ab control %}This is the control{% endab %}
+    {% ab v1 %}This is version 1{% endab %}
+
+You can mix the two tags in a single template::
+
+    {% experiment control %}This is the control{% endexperiment %}
+    {% ab v1 %}This is version 1{% endab %}
 
 Single and double quoted names are also supported.
 

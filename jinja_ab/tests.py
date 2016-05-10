@@ -16,7 +16,7 @@ class JinjaAbTestCase(TestCase):
         "Helper method"
         env = Environment(
                 loader=loader,
-                extensions=[jinja_ab.JinjaExperimentExtension],
+                extensions=[jinja_ab.JinjaAbExperimentExtension],
             )
         template = env.get_template('index.html')
         return template.render(context).strip()
@@ -86,3 +86,43 @@ class JinjaAbTestCase(TestCase):
 """})
         with self.assertRaises(TemplateSyntaxError):
             self._render(loader)
+
+    def test_with_ab_tag(self):
+        """
+            WHEN the ab tag is used,
+            THEN result is the same as if experiment tag was used
+        """
+        loader_experiment = DictLoader({'index.html': """
+{% experiment control %}This is the control{% endexperiment %}
+{% experiment v1 %}This is version 1{% endexperiment %}
+"""})
+
+        loader_ab = DictLoader({'index.html': """
+{% ab control %}This is the control{% endab %}
+{% ab v1 %}This is version 1{% endab %}
+"""})
+
+        # first render the control
+        self.assertEquals(self._render(loader_experiment),
+                          self._render(loader_ab))
+
+        # then render v1
+        os.environ[jinja_ab._ENV] = 'v1'
+        self.assertEquals(self._render(loader_experiment),
+                          self._render(loader_ab))
+
+    def test_mixing_experiment_and_ab_tags_in_one_template(self):
+        """
+            WHEN the experiment and ab tags are used together,
+            THEN result is the same as if only one of them was used
+        """
+        loader = DictLoader({'index.html': """
+{% experiment control %}This is the control{% endexperiment %}
+{% ab v1 %}This is version 1{% endab %}
+"""})
+        # first render the control
+        self.assertEquals(self._render(loader), "This is the control")
+
+        # then render v1
+        os.environ[jinja_ab._ENV] = 'v1'
+        self.assertEquals(self._render(loader), "This is version 1")
