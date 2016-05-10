@@ -25,7 +25,7 @@ class JinjaExperimentExtension(Extension):
             if parser.stream.current.test('name') or \
                parser.stream.current.test('string'):
                 name = parser.stream.current.value
-                parser.stream.next()
+                next(parser.stream)
             else:
                 raise TemplateSyntaxError("Can't parse experiment name",
                                           lineno)
