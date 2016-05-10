@@ -6,8 +6,6 @@ python:
 install:
   - pip install coverage flake8 Jinja2==$VERSION
 script:
-  - flake8 jinja_ab/
-  - coverage run --source jinja_ab/ --branch -m unittest -v jinja_ab.tests
-  - coverage report -m
+  - flake8 jinja_ab/ && coverage run --source jinja_ab/ --branch -m unittest -v jinja_ab.tests && coverage report -m
 env:
   - VERSION=2.8
