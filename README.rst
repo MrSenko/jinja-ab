@@ -8,8 +8,8 @@ Jinja2 A/B testing extension
 
 This is an A/B testing extension for Jinja. It allows you to encode
 experiments in your templates and renders the experiment selected by
-the `AB_EXPERIMENT` environment variable. 'control' is the default
-experiment name if `AB_EXPERIMENT` is not specified!
+the ``AB_EXPERIMENT`` environment variable. 'control' is the default
+experiment name if ``AB_EXPERIMENT`` is not specified!
 
 To install::
 
@@ -48,7 +48,7 @@ You can also mix the two tags in a single template::
 Single and double quoted names are also supported!
 
 **NOTE:** this extension deals with rendering the template string based
-on the value of `AB_EXPERIMENT`. It is up to you or your Jinja2 based tools
+on the value of ``AB_EXPERIMENT``. It is up to you or your Jinja2 based tools
 to decide what to do with the result. At `Mr. Senko <http://MrSenko.com>`_
 we use this extension as part of the
 `pelican-ab <https://github.com/MrSenko/pelican-ab>`_ plugin.
