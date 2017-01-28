@@ -9,3 +9,10 @@ script:
   - ./test.sh
 env:
   - _JINJA2=2.8
+  - _JINJA2=2.8.1
+  - _JINJA2=2.8.1
+  - _JINJA2=2.9
+  - _JINJA2=2.9.1
+  - _JINJA2=2.9.2
+  - _JINJA2=2.9.3
+  - _JINJA2=2.9.4
