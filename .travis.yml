@@ -4,8 +4,8 @@ python:
   - 2.7
   - 3.3
 install:
-  - pip install coverage flake8 Jinja2==$_JINJA_AB
+  - pip install coverage flake8 Jinja2==$_JINJA2
 script:
   - ./test.sh
 env:
-  - _JINJA_AB=2.8
+  - _JINJA2=2.8
