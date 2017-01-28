@@ -1,19 +1,20 @@
+env:
+- _JINJA2=2.8
+- _JINJA2=2.8.1
+- _JINJA2=2.9
+- _JINJA2=2.9.1
+- _JINJA2=2.9.2
+- _JINJA2=2.9.3
+- _JINJA2=2.9.4
+- !!python/unicode '_JINJA2=2.9.5'
+install:
+- pip install coverage flake8 Jinja2==$_JINJA2
 language: python
 python:
-  - 2.7
-  - 3.3
-  - 3.4
-  - 3.5
-  - 3.6
-install:
-  - pip install coverage flake8 Jinja2==$_JINJA2
+- 2.7
+- 3.3
+- 3.4
+- 3.5
+- 3.6
 script:
-  - ./test.sh
-env:
-  - _JINJA2=2.8
-  - _JINJA2=2.8.1
-  - _JINJA2=2.9
-  - _JINJA2=2.9.1
-  - _JINJA2=2.9.2
-  - _JINJA2=2.9.3
-  - _JINJA2=2.9.4
+- ./test.sh
